@@ -15,14 +15,14 @@ jobs:
         include:
           - platform: macos-15
             gui_target: "aarch64-apple-darwin"
-          - platform: macos-15-intel
-            gui_target: "x86_64-apple-darwin"
-          - platform: windows-2022
-            gui_target: "x86_64-pc-windows-msvc"
-          - platform: ubuntu-22.04-arm
-            gui_target: "aarch64-unknown-linux-gnu"
-          - platform: ubuntu-22.04
-            gui_target: "x86_64-unknown-linux-gnu"
+          # - platform: macos-15-intel
+          #   gui_target: "x86_64-apple-darwin"
+          # - platform: windows-2022
+          #   gui_target: "x86_64-pc-windows-msvc"
+          # - platform: ubuntu-22.04-arm
+          #   gui_target: "aarch64-unknown-linux-gnu"
+          # - platform: ubuntu-22.04
+          #   gui_target: "x86_64-unknown-linux-gnu"
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout repository
@@ -30,8 +30,8 @@ jobs:
 
       - uses: erlef/setup-beam@v1
         with:
-          otp-version: "27"
-          elixir-version: "1.19"
+          otp-version: "28.4.2"
+          elixir-version: "1.19.5"
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -114,6 +114,7 @@ jobs:
           # macOS codesigning/notarization
           # APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE_P12_BASE64 }}
           # APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_P12_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: "-" # ad-hoc signature
           # APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
           # APPLE_ID: ${{ secrets.APPLE_ID }}
           # APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
